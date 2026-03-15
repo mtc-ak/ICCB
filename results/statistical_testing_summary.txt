@@ -1,0 +1,12 @@
+==== Statistical Testing Summary ====
+
+--- DeLong Tests (DEV Test Set) ---
+  XGB vs LR: ΔAUC = 0.0005, p-value = 0.8517
+  XGB vs RF: ΔAUC = 0.0910, p-value = 0.0064 **
+
+--- DeLong Tests (External Cohort) ---
+  XGB vs LR: ΔAUC = 0.0061, p-value = 0.8112
+
+--- McNemar Tests (DEV Test Set) ---
+  XGB vs LR: p-value = 0.0002 *** (b=22, c=1)
+  XGB vs RF: p-value = 0.0863 n.s. (b=9, c=1)

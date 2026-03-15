@@ -1,0 +1,7 @@
+Cohort	Model	ECE
+DEV_Test	LR	0.0642
+External	LR	0.0357
+DEV_Test	RF	0.3413
+External	RF	0.2036
+DEV_Test	XGB	0.1867
+External	XGB	0.1998

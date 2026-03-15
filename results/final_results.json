@@ -1,0 +1,19 @@
+{
+  "dev": {
+    "LR": {"Model":"LR","AUC":0.9974,"AUC_CI_L":0.99,"AUC_CI_U":1.0,"Accuracy":0.7386,"Recall":0.4651,"F1":0.6349,"Brier":0.0229,"ECE":0.0642,"Threshold":0.9858},
+    "RF": {"Model":"RF","AUC":0.9070,"AUC_CI_L":0.8287,"AUC_CI_U":0.9664,"Accuracy":0.8864,"Recall":0.8140,"F1":0.875,"Brier":0.2071,"ECE":0.3413,"Threshold":0.4952},
+    "XGB": {"Model":"XGB","AUC":0.9979,"AUC_CI_L":0.9907,"AUC_CI_U":1.0,"Accuracy":0.9773,"Recall":0.9767,"F1":0.9767,"Brier":0.0570,"ECE":0.1867,"Threshold":0.4653}
+  },
+  "ext": {
+    "LR": {"Model":"LR","AUC":0.8643,"AUC_CI_L":0.8161,"AUC_CI_U":0.9098,"Accuracy":0.5283,"Recall":0.0196,"F1":0.0385,"Brier":0.1509,"ECE":0.0357,"Threshold":0.9858},
+    "RF": {"Model":"RF","AUC":0.8016,"AUC_CI_L":0.7379,"AUC_CI_U":0.8609,"Accuracy":0.7642,"Recall":0.5392,"F1":0.6875,"Brier":0.2290,"ECE":0.2036,"Threshold":0.4952},
+    "XGB": {"Model":"XGB","AUC":0.8704,"AUC_CI_L":0.8202,"AUC_CI_U":0.9124,"Accuracy":0.6840,"Recall":0.3529,"F1":0.5180,"Brier":0.2090,"ECE":0.1998,"Threshold":0.4653}
+  },
+  "stats": {
+    "delong_dev_xgb_lr": 0.8517,
+    "delong_dev_xgb_rf": 0.0064,
+    "delong_ext_xgb_lr": 0.8112,
+    "mcnemar_xgb_lr": 0.000167,
+    "mcnemar_xgb_rf": 0.0863
+  }
+}
