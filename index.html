@@ -4,121 +4,302 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ICCB | Microbiome-Based CRC Prediction</title>
+  <meta
+    name="description"
+    content="장내 마이크로바이옴 기반 대장암 예측 프로젝트. 공개 메타게놈 코호트와 외부 검증을 이용한 머신러닝 비교 연구."
+  />
   <style>
     :root {
-      --bg: #f5f1ea;
-      --panel: #fffdf9;
-      --text: #1f1f1f;
-      --muted: #5e5a54;
-      --accent: #8b3d2c;
-      --accent-soft: #f2e4dc;
-      --line: #ddd3c7;
-      --notice: #fff1e7;
-      --notice-line: #d87b4a;
+      --bg: #f3efe8;
+      --surface: #fffdf8;
+      --surface-2: #f7f1e6;
+      --text: #1f1b18;
+      --muted: #635b55;
+      --line: #ddd1c2;
+      --accent: #8f3d2e;
+      --accent-2: #184e77;
+      --accent-soft: #f3dfd7;
+      --success: #2f6b4f;
+      --warning-bg: #fff1e4;
+      --warning-line: #d57a42;
+      --shadow: 0 14px 32px rgba(43, 28, 16, 0.08);
+      --radius: 20px;
+      --max: 1120px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
-      font-family: "Noto Serif KR", Georgia, serif;
-      background: linear-gradient(180deg, #efe8dd 0%, #fbfaf7 100%);
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(143, 61, 46, 0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(24, 78, 119, 0.09), transparent 24%),
+        linear-gradient(180deg, #efe9df 0%, #faf7f2 44%, #f4efe6 100%);
+      font-family: "Noto Serif KR", Georgia, serif;
     }
 
-    .wrap {
-      max-width: 980px;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(248, 244, 238, 0.82);
+      border-bottom: 1px solid rgba(221, 209, 194, 0.8);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 56px 20px 80px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
     }
 
-    .eyebrow {
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      line-height: 1.15;
-    }
-
-    .subtitle {
-      max-width: 760px;
-      margin-top: 16px;
-      font-size: 1.08rem;
-      line-height: 1.8;
-      color: var(--muted);
-    }
-
-    .notice {
-      margin-top: 28px;
-      padding: 18px 20px;
-      border: 1px solid var(--notice-line);
-      border-left: 6px solid var(--notice-line);
-      border-radius: 14px;
-      background: var(--notice);
-    }
-
-    .notice strong {
-      display: block;
-      margin-bottom: 6px;
+    .brand {
+      font-family: Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      font-size: 0.95rem;
       color: var(--accent);
     }
 
-    .links {
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px 72px;
+    }
+
+    .hero {
+      padding: 52px 0 26px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-main,
+    .hero-side {
+      background: rgba(255, 253, 248, 0.8);
+      border: 1px solid rgba(221, 209, 194, 0.9);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 34px 32px 32px;
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.86), rgba(250, 243, 236, 0.96)),
+        linear-gradient(135deg, rgba(143, 61, 46, 0.06), rgba(24, 78, 119, 0.05));
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-sub {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.85;
+    }
+
+    .btn-row {
+      margin-top: 26px;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 28px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      padding: 12px 18px;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
       border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
       border: 1px solid var(--line);
-      background: var(--panel);
-      color: var(--text);
+      background: var(--surface);
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
 
-    .btn.primary {
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(31, 27, 24, 0.08);
+    }
+
+    .btn-primary {
       background: var(--accent);
-      border-color: var(--accent);
       color: #fff;
+      border-color: var(--accent);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    .btn-secondary {
+      color: var(--accent-2);
+      border-color: rgba(24, 78, 119, 0.28);
+    }
+
+    .hero-side {
+      padding: 26px 24px;
+      background:
+        linear-gradient(180deg, rgba(24, 78, 119, 0.08), rgba(255, 255, 255, 0.82)),
+        var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       gap: 18px;
-      margin-top: 34px;
+    }
+
+    .side-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent-2);
+    }
+
+    .metric-block {
+      display: grid;
+      gap: 14px;
+    }
+
+    .metric {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(221, 209, 194, 0.95);
+    }
+
+    .metric strong {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 18px 20px;
+      background: var(--warning-bg);
+      border: 1px solid rgba(213, 122, 66, 0.36);
+      border-left: 6px solid var(--warning-line);
+      border-radius: 18px;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--accent);
+      font-family: Arial, sans-serif;
+    }
+
+    section {
+      padding-top: 34px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
     }
 
     .card {
-      background: var(--panel);
+      background: rgba(255, 253, 248, 0.92);
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: var(--radius);
       padding: 22px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+      box-shadow: var(--shadow);
     }
 
-    .card h2 {
+    .card h3 {
       margin: 0 0 10px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--accent);
     }
 
     .card p,
     .card li {
-      line-height: 1.7;
+      margin: 0;
       color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.96rem;
     }
 
     .card ul {
@@ -126,87 +307,386 @@
       padding-left: 18px;
     }
 
-    .section {
-      margin-top: 42px;
-      padding-top: 26px;
-      border-top: 1px solid var(--line);
+    .summary {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
     }
 
-    .section h2 {
-      margin: 0 0 12px;
+    .highlight-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .highlight {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .highlight strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--success);
+      font-family: Arial, sans-serif;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .figure {
+      background: rgba(255, 253, 248, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .figure img {
+      display: block;
+      width: 100%;
+      height: 270px;
+      object-fit: contain;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .figure figcaption {
+      padding: 14px 16px 16px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .figure figcaption strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .resource {
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 239, 230, 0.85));
+      box-shadow: var(--shadow);
+    }
+
+    .resource .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--accent-soft);
       color: var(--accent);
-      font-size: 1.25rem;
+    }
+
+    .resource h3 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .resource p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .resource a {
+      color: var(--accent-2);
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 38px;
+      padding: 24px 0 8px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
     }
 
     code {
-      padding: 2px 6px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 8px;
       background: var(--accent-soft);
       font-family: Consolas, monospace;
       font-size: 0.92em;
     }
+
+    @media (max-width: 980px) {
+      .hero,
+      .summary,
+      .resource-grid,
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner,
+      .section-head {
+        display: block;
+      }
+
+      .nav-links {
+        margin-top: 10px;
+      }
+
+      .hero,
+      .summary,
+      .resource-grid,
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .hero-side,
+      .card,
+      .resource,
+      .figure {
+        border-radius: 20px;
+      }
+
+      .hero-main,
+      .hero-side {
+        padding: 24px 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="eyebrow">ICCB Project Site</div>
-    <h1>장내 마이크로바이옴 기반<br />대장암 예측 연구</h1>
-    <p class="subtitle">
-      공개 메타게놈 코호트를 이용하여 colorectal cancer prediction 모델을 비교하고,
-      development cohort와 external validation cohort에서 일반화 성능을 평가하는 연구 프로젝트입니다.
-    </p>
-
-    <div class="notice">
-      <strong>다운로드 안내</strong>
-      이 공개 홈페이지에서는 데이터 파일을 직접 다운로드할 수 없습니다.
-      데이터 및 다운로드 가능한 파일은 <code>Private GitHub Repository (ICCB-data)</code> 에서만 관리합니다.
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">ICCB</div>
+      <div class="nav-links">
+        <a href="#overview">개요</a>
+        <a href="#findings">핵심 결과</a>
+        <a href="#figures">시각화</a>
+        <a href="#resources">리소스</a>
+      </div>
     </div>
+  </nav>
 
-    <div class="links">
-      <a class="btn primary" href="https://github.com/mtc-ak/ICCB">Public GitHub Repository</a>
-      <a class="btn" href="https://github.com/mtc-ak/ICCB-data">Private Data Repository</a>
-      <a class="btn" href="https://mtc-ak.github.io/ICCB/">Project Homepage</a>
-    </div>
-
-    <div class="grid">
-      <section class="card">
-        <h2>Project Scope</h2>
-        <p>
-          공개 장내 메타게놈 데이터셋을 기반으로 CRC 예측 모델을 구축하고,
-          Logistic Regression, Random Forest, XGBoost를 비교합니다.
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">Public Research Website</div>
+        <h1>장내 마이크로바이옴 기반<br />대장암 예측 프로젝트</h1>
+        <p class="hero-sub">
+          공개 메타게놈 코호트 <code>ZellerG_2014</code> 와 <code>YachidaS_2019</code> 를 이용해
+          colorectal cancer prediction 모델을 비교하고, development cohort와 external validation cohort
+          사이의 일반화 성능 차이를 평가한 프로젝트입니다.
         </p>
-      </section>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://github.com/mtc-ak/ICCB">Public Repository</a>
+          <a class="btn btn-secondary" href="https://github.com/mtc-ak/ICCB-data">Private Data Repository</a>
+          <a class="btn btn-secondary" href="#figures">결과 그림 보기</a>
+        </div>
+        <div class="notice">
+          <strong>다운로드 안내</strong>
+          이 공개 홈페이지에서는 데이터 파일을 직접 다운로드할 수 없습니다.
+          다운로드 가능한 데이터, 원본 파일, 대용량 산출물은 <code>Private GitHub Repository (ICCB-data)</code> 에서만 관리합니다.
+        </div>
+      </div>
 
-      <section class="card">
-        <h2>Datasets</h2>
-        <ul>
-          <li>Development cohort: <code>ZellerG_2014</code></li>
-          <li>External validation cohort: <code>YachidaS_2019</code></li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Public Repository</h2>
-        <p>
-          코드, 문서, 공개 가능한 figure, 요약 결과는 public repository에서 확인할 수 있습니다.
-        </p>
-      </section>
-
-      <section class="card">
-        <h2>Private Repository</h2>
-        <p>
-          원본 데이터, 다운로드 파일, 대용량 산출물, 비공개 자료는 private repository에서만 제공합니다.
-        </p>
-      </section>
-    </div>
-
-    <section class="section">
-      <h2>Local Site Source</h2>
-      <p>
-        이 공개 사이트의 로컬 작업 기준 폴더는 <code>D:\data\OneDrive\00_공부중\한주\ICBBS</code> 입니다.
-        홈페이지 수정은 이 폴더를 기준으로 진행하고, 이후 GitHub Pages에 반영합니다.
-      </p>
+      <aside class="hero-side">
+        <div>
+          <div class="side-label">Snapshot</div>
+          <div class="metric-block">
+            <div class="metric">
+              <strong>0.8487</strong>
+              <span>개발 코호트 테스트셋에서 Random Forest의 최고 AUC</span>
+            </div>
+            <div class="metric">
+              <strong>0.6228</strong>
+              <span>외부 검증 코호트에서 XGBoost의 최고 AUC</span>
+            </div>
+            <div class="metric">
+              <strong>290 taxa</strong>
+              <span>전처리 후 최종 분석에 사용된 공통 feature 수</span>
+            </div>
+          </div>
+        </div>
+        <div class="metric">
+          <strong>D:\data\...</strong>
+          <span>로컬 홈페이지 작업 기준 폴더: <code>D:\data\OneDrive\00_공부중\한주\ICBBS</code></span>
+        </div>
+      </aside>
     </section>
-  </div>
+
+    <section id="overview">
+      <div class="section-head">
+        <h2>프로젝트 개요</h2>
+        <p>
+          공개 가능한 코드, 문서, figure, 요약 결과를 한 곳에서 보여주는 소개용 사이트입니다.
+          데이터 배포보다는 연구 구조와 결과 해석을 빠르게 이해할 수 있도록 구성했습니다.
+        </p>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Datasets</h3>
+          <ul>
+            <li>Development cohort: <code>ZellerG_2014</code></li>
+            <li>External validation cohort: <code>YachidaS_2019</code></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Models</h3>
+          <ul>
+            <li>Logistic Regression</li>
+            <li>Random Forest</li>
+            <li>XGBoost</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Public Website</h3>
+          <p>
+            코드, 논문 초안, 공개 figure, 경량 결과 파일을 정리해 보여주는 페이지입니다.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Private Repository</h3>
+          <p>
+            원본 데이터, 다운로드 파일, 대용량 산출물, 비공개 리소스는 private 저장소에서만 관리합니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="findings">
+      <div class="section-head">
+        <h2>핵심 결과</h2>
+        <p>
+          개발 코호트에서는 Random Forest가 가장 좋은 분류 성능을 보였고,
+          외부 검증에서는 XGBoost가 가장 높은 AUC를 보였습니다. 다만 외부 코호트에서 전체 성능은 감소했습니다.
+        </p>
+      </div>
+      <div class="summary">
+        <div class="highlight-list">
+          <div class="highlight">
+            <strong>Development Cohort</strong>
+            개발 코호트 테스트셋에서 Random Forest는 AUC 0.8487, F1-score 0.7500으로 가장 우수했습니다.
+          </div>
+          <div class="highlight">
+            <strong>External Validation</strong>
+            외부 검증에서는 XGBoost가 AUC 0.6228로 가장 높았지만, 전체적으로 개발 코호트보다 성능이 하락했습니다.
+          </div>
+          <div class="highlight">
+            <strong>Calibration</strong>
+            외부 코호트에서 ECE는 Random Forest가 0.0705로 가장 낮아 확률 보정 성능이 가장 좋았습니다.
+          </div>
+        </div>
+        <div class="card">
+          <h3>해석 포인트</h3>
+          <p>
+            이 결과는 내부 테스트셋 성능만으로 모델의 실사용 가능성을 판단하기 어렵다는 점을 보여줍니다.
+            외부 검증에서 성능 저하가 나타났기 때문에, 마이크로바이옴 기반 CRC 예측모델의 일반화에는 추가 검증이 필요합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="figures">
+      <div class="section-head">
+        <h2>대표 Figure</h2>
+        <p>
+          프로젝트에서 생성한 주요 시각화입니다. 상세 데이터 다운로드는 제공하지 않지만,
+          공개 가능한 figure는 이 페이지에서 바로 확인할 수 있습니다.
+        </p>
+      </div>
+      <div class="gallery">
+        <figure class="figure">
+          <img src="figures/fig1_roc_dev.png" alt="ROC curve figure" />
+          <figcaption>
+            <strong>ROC Curve</strong>
+            개발 코호트 테스트셋과 외부 검증 코호트의 ROC 성능 비교.
+          </figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="figures/fig_cal.png" alt="Calibration figure" />
+          <figcaption>
+            <strong>Calibration</strong>
+            예측 확률과 실제 사건 비율의 일치 정도를 보여주는 reliability curve.
+          </figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="figures/fig3_perf_barplot.png" alt="Performance comparison figure" />
+          <figcaption>
+            <strong>Performance Comparison</strong>
+            AUC, PR-AUC, Recall, F1, Accuracy를 모델별로 비교한 요약 그래프.
+          </figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="figures/fig5_generalizability.png" alt="Generalizability figure" />
+          <figcaption>
+            <strong>Generalizability</strong>
+            development cohort와 external cohort 사이에서 AUC가 어떻게 변하는지 비교.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="resources">
+      <div class="section-head">
+        <h2>리소스</h2>
+        <p>
+          공개 코드와 private 데이터 저장소의 역할을 분리해 두었습니다.
+          목적에 따라 적절한 저장소를 이용할 수 있도록 정리했습니다.
+        </p>
+      </div>
+      <div class="resource-grid">
+        <article class="resource">
+          <div class="tag">Public</div>
+          <h3>ICCB Repository</h3>
+          <p>
+            공개 코드, 문서, 요약 결과, 홈페이지 소스를 관리하는 메인 저장소입니다.
+          </p>
+          <a href="https://github.com/mtc-ak/ICCB">https://github.com/mtc-ak/ICCB</a>
+        </article>
+        <article class="resource">
+          <div class="tag">Private</div>
+          <h3>ICCB-data</h3>
+          <p>
+            다운로드 가능한 데이터, 대용량 파일, 비공개 산출물은 private 저장소에서만 제공합니다.
+          </p>
+          <a href="https://github.com/mtc-ak/ICCB-data">https://github.com/mtc-ak/ICCB-data</a>
+        </article>
+        <article class="resource">
+          <div class="tag">Local</div>
+          <h3>Workspace</h3>
+          <p>
+            로컬 홈페이지 수정 기준 경로는 <code>D:\data\OneDrive\00_공부중\한주\ICBBS</code> 입니다.
+          </p>
+          <a href="#overview">현재 페이지 기준 설명 보기</a>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      ICCB public site is designed for project presentation, code access, and figure preview.
+      Downloadable data and private artifacts are intentionally separated into the private repository.
+    </footer>
+  </main>
 </body>
 </html>
