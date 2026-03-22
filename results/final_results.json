@@ -1,0 +1,138 @@
+{
+  "cohort_info": {
+    "dev": {
+      "n_total": 114,
+      "n_crc": 53,
+      "n_ctrl": 61,
+      "n_taxa": 652
+    },
+    "ext": {
+      "n_total": 509,
+      "n_crc": 258,
+      "n_ctrl": 251,
+      "n_taxa": 718
+    }
+  },
+  "split_info": {
+    "train_n": 79,
+    "train_crc": 37,
+    "train_ctrl": 42,
+    "test_n": 35,
+    "test_crc": 16,
+    "test_ctrl": 19,
+    "n_taxa": 290
+  },
+  "thresholds": {
+    "LR": 0.5,
+    "RF": 0.483,
+    "XGB": 0.4872
+  },
+  "dev_results": [
+    {
+      "Model": "LR",
+      "AUC": 0.3914,
+      "AUC_CI_L": 0.2303,
+      "AUC_CI_U": 0.5576,
+      "PR_AUC": 0.3872,
+      "Accuracy": 0.4,
+      "Recall": 0.375,
+      "Precision": 0.3529,
+      "F1": 0.3636,
+      "Brier": 0.5999,
+      "ECE": 0.6,
+      "Threshold": 0.5
+    },
+    {
+      "Model": "RF",
+      "AUC": 0.8487,
+      "AUC_CI_L": 0.7039,
+      "AUC_CI_U": 0.9572,
+      "PR_AUC": 0.8447,
+      "Accuracy": 0.7714,
+      "Recall": 0.75,
+      "Precision": 0.75,
+      "F1": 0.75,
+      "Brier": 0.186,
+      "ECE": 0.179,
+      "Threshold": 0.483
+    },
+    {
+      "Model": "XGB",
+      "AUC": 0.8059,
+      "AUC_CI_L": 0.6414,
+      "AUC_CI_U": 0.9408,
+      "PR_AUC": 0.7387,
+      "Accuracy": 0.7429,
+      "Recall": 0.75,
+      "Precision": 0.7059,
+      "F1": 0.7273,
+      "Brier": 0.1784,
+      "ECE": 0.2216,
+      "Threshold": 0.4872
+    }
+  ],
+  "ext_results": [
+    {
+      "Model": "LR",
+      "AUC": 0.5415,
+      "AUC_CI_L": 0.4975,
+      "AUC_CI_U": 0.5849,
+      "PR_AUC": 0.5372,
+      "Accuracy": 0.5324,
+      "Recall": 0.5116,
+      "Precision": 0.541,
+      "F1": 0.5259,
+      "Brier": 0.4615,
+      "ECE": 0.4639,
+      "Threshold": 0.5
+    },
+    {
+      "Model": "RF",
+      "AUC": 0.5993,
+      "AUC_CI_L": 0.5491,
+      "AUC_CI_U": 0.647,
+      "PR_AUC": 0.5681,
+      "Accuracy": 0.5815,
+      "Recall": 0.6395,
+      "Precision": 0.5789,
+      "F1": 0.6077,
+      "Brier": 0.2458,
+      "ECE": 0.0705,
+      "Threshold": 0.483
+    },
+    {
+      "Model": "XGB",
+      "AUC": 0.6228,
+      "AUC_CI_L": 0.5754,
+      "AUC_CI_U": 0.6693,
+      "PR_AUC": 0.6051,
+      "Accuracy": 0.6012,
+      "Recall": 0.6938,
+      "Precision": 0.5908,
+      "F1": 0.6381,
+      "Brier": 0.2762,
+      "ECE": 0.1733,
+      "Threshold": 0.4872
+    }
+  ],
+  "statistical_tests": {
+    "delong_dev_xgb_vs_lr": {
+      "delta_auc": -0.4145,
+      "p_value": 0.0006
+    },
+    "delong_dev_xgb_vs_rf": {
+      "delta_auc": 0.0428,
+      "p_value": 0.4874
+    },
+    "delong_ext_xgb_vs_lr": {
+      "delta_auc": -0.0814,
+      "p_value": 0.011
+    },
+    "mcnemar_dev_xgb_vs_lr": {
+      "p_value": 1
+    },
+    "mcnemar_dev_xgb_vs_rf": {
+      "p_value": 1
+    }
+  }
+}
