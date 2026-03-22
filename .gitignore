@@ -1,29 +1,34 @@
-# R output files (large / regeneratable)
-r_results/
-*.rds
-*.rda
-*.RData
-
-# R temporary files
+# R session / project
 .Rhistory
 .RData
+.Ruserdata
 .Rproj.user/
-*.Rproj
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
+# Local runtime / generated folders
+output/
+tmp/
+r_libs/
+codex_crc/output/
+codex_crc/tmp/
+codex_crc/r_libs/
 
-# Word documents (binary)
-docs/*.docx
+# Generated artifacts
+*.log
+*.tmp
 
-# Large archives
-_archive/
+# Compressed files
+*.zip
+*.tar
+*.tar.gz
+*.7z
 
 # OS files
-.DS_Store
 Thumbs.db
+.DS_Store
 
-# Figures (regeneratable from R scripts)
-r_results/figures/
+# Optional large binary outputs
+*.rds
+
+# Cache
+_cache/
+cache/
