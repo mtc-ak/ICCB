@@ -1,137 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ICCB</title>
+  <title>ICCB | Microbiome-Based CRC Prediction</title>
   <style>
     :root {
-      --bg: #f6f3ee;
-      --card: #fffdf9;
+      --bg: #f5f1ea;
+      --panel: #fffdf9;
       --text: #1f1f1f;
-      --muted: #5f5a52;
-      --accent: #8c3b2a;
-      --line: #ded6ca;
+      --muted: #5e5a54;
+      --accent: #8b3d2c;
+      --accent-soft: #f2e4dc;
+      --line: #ddd3c7;
+      --notice: #fff1e7;
+      --notice-line: #d87b4a;
     }
+
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      background: linear-gradient(180deg, #f3efe8 0%, #fbfaf7 100%);
+      font-family: "Noto Serif KR", Georgia, serif;
+      background: linear-gradient(180deg, #efe8dd 0%, #fbfaf7 100%);
       color: var(--text);
     }
 
     .wrap {
-      max-width: 920px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 56px 20px 80px;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin: 0 0 8px;
-      letter-spacing: 0.02em;
+    .eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
     }
 
-    h2 {
-      margin-top: 0;
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin-top: 16px;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border: 1px solid var(--notice-line);
+      border-left: 6px solid var(--notice-line);
+      border-radius: 14px;
+      background: var(--notice);
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 6px;
       color: var(--accent);
     }
 
-    p {
-      line-height: 1.7;
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
     }
 
-    .lead {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 760px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 18px;
-      margin-top: 28px;
+      margin-top: 34px;
     }
 
     .card {
-      background: var(--card);
+      background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 18px;
       padding: 22px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
     }
 
-    a {
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
       color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    ul {
-      margin: 10px 0 0;
-      padding-left: 18px;
+    .card p,
+    .card li {
       line-height: 1.7;
+      color: var(--muted);
     }
 
-    .topline {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 14px;
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .section {
+      margin-top: 42px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 1.25rem;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      font-family: Consolas, monospace;
+      font-size: 0.92em;
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="topline">ICCB Project</div>
-    <h1>Microbiome-Based CRC Prediction</h1>
-    <p class="lead">
-      A public research project comparing machine learning models for colorectal cancer prediction
-      using gut microbiome metagenomic cohorts and external validation.
+    <div class="eyebrow">ICCB Project Site</div>
+    <h1>장내 마이크로바이옴 기반<br />대장암 예측 연구</h1>
+    <p class="subtitle">
+      공개 메타게놈 코호트를 이용하여 colorectal cancer prediction 모델을 비교하고,
+      development cohort와 external validation cohort에서 일반화 성능을 평가하는 연구 프로젝트입니다.
     </p>
+
+    <div class="notice">
+      <strong>다운로드 안내</strong>
+      이 공개 홈페이지에서는 데이터 파일을 직접 다운로드할 수 없습니다.
+      데이터 및 다운로드 가능한 파일은 <code>Private GitHub Repository (ICCB-data)</code> 에서만 관리합니다.
+    </div>
+
+    <div class="links">
+      <a class="btn primary" href="https://github.com/mtc-ak/ICCB">Public GitHub Repository</a>
+      <a class="btn" href="https://github.com/mtc-ak/ICCB-data">Private Data Repository</a>
+      <a class="btn" href="https://mtc-ak.github.io/ICCB/">Project Homepage</a>
+    </div>
 
     <div class="grid">
       <section class="card">
-        <h2>Overview</h2>
+        <h2>Project Scope</h2>
         <p>
-          This project evaluates microbiome-based prediction of colorectal cancer using
-          public cohorts and compares Logistic Regression, Random Forest, and XGBoost.
+          공개 장내 메타게놈 데이터셋을 기반으로 CRC 예측 모델을 구축하고,
+          Logistic Regression, Random Forest, XGBoost를 비교합니다.
         </p>
       </section>
 
       <section class="card">
         <h2>Datasets</h2>
         <ul>
-          <li>Development cohort: ZellerG_2014</li>
-          <li>External validation cohort: YachidaS_2019</li>
+          <li>Development cohort: <code>ZellerG_2014</code></li>
+          <li>External validation cohort: <code>YachidaS_2019</code></li>
         </ul>
       </section>
 
       <section class="card">
-        <h2>Models</h2>
-        <ul>
-          <li>Logistic Regression</li>
-          <li>Random Forest</li>
-          <li>XGBoost</li>
-        </ul>
+        <h2>Public Repository</h2>
+        <p>
+          코드, 문서, 공개 가능한 figure, 요약 결과는 public repository에서 확인할 수 있습니다.
+        </p>
       </section>
 
       <section class="card">
-        <h2>Repositories</h2>
-        <ul>
-          <li><a href="https://github.com/mtc-ak/ICCB">Public Repository</a></li>
-          <li><a href="https://github.com/mtc-ak/ICCB-data">Private Data Repository</a></li>
-          <li><a href="https://mtc-ak.github.io/ICCB">Project Homepage</a></li>
-        </ul>
+        <h2>Private Repository</h2>
+        <p>
+          원본 데이터, 다운로드 파일, 대용량 산출물, 비공개 자료는 private repository에서만 제공합니다.
+        </p>
       </section>
     </div>
+
+    <section class="section">
+      <h2>Local Site Source</h2>
+      <p>
+        이 공개 사이트의 작업 기준 폴더는 <code>C:\Users\minta\ICBBS\ICCB_site</code> 입니다.
+        로컬 수정은 이 폴더를 기준으로 진행하고, 이후 GitHub Pages에 반영합니다.
+      </p>
+    </section>
   </div>
 </body>
 </html>
