@@ -1,0 +1,29 @@
+# R output files (large / regeneratable)
+r_results/
+*.rds
+*.rda
+*.RData
+
+# R temporary files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Word documents (binary)
+docs/*.docx
+
+# Large archives
+_archive/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Figures (regeneratable from R scripts)
+r_results/figures/
