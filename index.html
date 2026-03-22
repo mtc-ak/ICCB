@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ICCB | Microbiome-Based CRC Prediction</title>
+  <title>ICCB | 장내 마이크로바이옴 기반 대장암 예측</title>
   <meta
     name="description"
-    content="장내 마이크로바이옴 기반 대장암 예측 프로젝트. 공개 메타게놈 코호트와 외부 검증을 이용한 머신러닝 비교 연구."
+    content="공개 메타게놈 코호트와 외부 검증을 이용한 장내 마이크로바이옴 기반 대장암 예측 연구 프로젝트."
   />
   <style>
     :root {
       --bg: #f3efe8;
       --surface: #fffdf8;
-      --surface-2: #f7f1e6;
-      --text: #1f1b18;
-      --muted: #635b55;
+      --surface-2: #f7f0e6;
+      --text: #1d1b19;
+      --muted: #645d58;
       --line: #ddd1c2;
       --accent: #8f3d2e;
-      --accent-2: #184e77;
-      --accent-soft: #f3dfd7;
+      --accent-2: #1f587d;
+      --accent-soft: #f4e1d9;
       --success: #2f6b4f;
-      --warning-bg: #fff1e4;
-      --warning-line: #d57a42;
+      --warning-bg: #fff1e6;
+      --warning-line: #d57b42;
       --shadow: 0 14px 32px rgba(43, 28, 16, 0.08);
       --radius: 20px;
       --max: 1120px;
@@ -40,9 +40,9 @@
       color: var(--text);
       background:
         radial-gradient(circle at top left, rgba(143, 61, 46, 0.08), transparent 28%),
-        radial-gradient(circle at top right, rgba(24, 78, 119, 0.09), transparent 24%),
-        linear-gradient(180deg, #efe9df 0%, #faf7f2 44%, #f4efe6 100%);
-      font-family: "Noto Serif KR", Georgia, serif;
+        radial-gradient(circle at top right, rgba(31, 88, 125, 0.08), transparent 24%),
+        linear-gradient(180deg, #efe9df 0%, #faf7f2 46%, #f4efe6 100%);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
     }
 
     a {
@@ -53,9 +53,9 @@
     .nav {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
       backdrop-filter: blur(12px);
-      background: rgba(248, 244, 238, 0.82);
+      background: rgba(248, 244, 238, 0.84);
       border-bottom: 1px solid rgba(221, 209, 194, 0.8);
     }
 
@@ -70,10 +70,9 @@
     }
 
     .brand {
-      font-family: Arial, sans-serif;
       font-weight: 800;
       letter-spacing: 0.14em;
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       color: var(--accent);
     }
 
@@ -81,8 +80,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--muted);
     }
 
@@ -105,18 +103,33 @@
     }
 
     .hero-main,
-    .hero-side {
-      background: rgba(255, 253, 248, 0.8);
-      border: 1px solid rgba(221, 209, 194, 0.9);
-      border-radius: 28px;
+    .hero-side,
+    .card,
+    .resource,
+    .figure,
+    .highlight {
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid rgba(221, 209, 194, 0.95);
+      border-radius: 24px;
       box-shadow: var(--shadow);
     }
 
     .hero-main {
       padding: 34px 32px 32px;
       background:
-        linear-gradient(160deg, rgba(255, 255, 255, 0.86), rgba(250, 243, 236, 0.96)),
-        linear-gradient(135deg, rgba(143, 61, 46, 0.06), rgba(24, 78, 119, 0.05));
+        linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(250, 243, 236, 0.98)),
+        linear-gradient(135deg, rgba(143, 61, 46, 0.06), rgba(31, 88, 125, 0.05));
+    }
+
+    .hero-side {
+      padding: 26px 24px;
+      background:
+        linear-gradient(180deg, rgba(31, 88, 125, 0.08), rgba(255, 255, 255, 0.9)),
+        var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
     }
 
     .eyebrow {
@@ -125,7 +138,6 @@
       border-radius: 999px;
       background: var(--accent-soft);
       color: var(--accent);
-      font-family: Arial, sans-serif;
       font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -134,8 +146,9 @@
 
     h1 {
       margin: 18px 0 12px;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.1;
+      font-family: "Noto Serif KR", "Malgun Gothic", serif;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.14;
       letter-spacing: -0.03em;
     }
 
@@ -143,8 +156,8 @@
       margin: 0;
       max-width: 720px;
       color: var(--muted);
-      font-size: 1.06rem;
-      line-height: 1.85;
+      font-size: 1.04rem;
+      line-height: 1.9;
     }
 
     .btn-row {
@@ -163,7 +176,6 @@
       border-radius: 999px;
       border: 1px solid var(--line);
       background: var(--surface);
-      font-family: Arial, sans-serif;
       font-size: 0.92rem;
       font-weight: 700;
       transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
@@ -182,23 +194,11 @@
 
     .btn-secondary {
       color: var(--accent-2);
-      border-color: rgba(24, 78, 119, 0.28);
-    }
-
-    .hero-side {
-      padding: 26px 24px;
-      background:
-        linear-gradient(180deg, rgba(24, 78, 119, 0.08), rgba(255, 255, 255, 0.82)),
-        var(--surface);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
+      border-color: rgba(31, 88, 125, 0.3);
     }
 
     .side-label {
-      font-family: Arial, sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.79rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.09em;
@@ -213,13 +213,12 @@
     .metric {
       padding: 14px 16px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       border: 1px solid rgba(221, 209, 194, 0.95);
     }
 
     .metric strong {
       display: block;
-      font-family: Arial, sans-serif;
       font-size: 1.5rem;
       color: var(--accent);
       margin-bottom: 4px;
@@ -227,17 +226,16 @@
 
     .metric span {
       display: block;
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     .notice {
       margin-top: 14px;
       padding: 18px 20px;
       background: var(--warning-bg);
-      border: 1px solid rgba(213, 122, 66, 0.36);
+      border: 1px solid rgba(213, 123, 66, 0.35);
       border-left: 6px solid var(--warning-line);
       border-radius: 18px;
     }
@@ -246,7 +244,6 @@
       display: block;
       margin-bottom: 7px;
       color: var(--accent);
-      font-family: Arial, sans-serif;
     }
 
     section {
@@ -263,15 +260,17 @@
 
     .section-head h2 {
       margin: 0;
-      font-size: 1.5rem;
+      font-family: "Noto Serif KR", "Malgun Gothic", serif;
+      font-size: 1.55rem;
       color: var(--accent);
     }
 
     .section-head p {
       margin: 0;
-      max-width: 560px;
+      max-width: 580px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.8;
+      font-size: 0.96rem;
     }
 
     .card-grid {
@@ -281,25 +280,21 @@
     }
 
     .card {
-      background: rgba(255, 253, 248, 0.92);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
       padding: 22px;
-      box-shadow: var(--shadow);
     }
 
     .card h3 {
       margin: 0 0 10px;
-      font-size: 1.05rem;
       color: var(--accent);
+      font-size: 1.06rem;
     }
 
     .card p,
     .card li {
       margin: 0;
       color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.96rem;
+      line-height: 1.8;
+      font-size: 0.95rem;
     }
 
     .card ul {
@@ -309,7 +304,7 @@
 
     .summary {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.08fr 0.92fr;
       gap: 18px;
     }
 
@@ -320,16 +315,19 @@
 
     .highlight {
       padding: 16px 18px;
-      border-radius: 18px;
-      background: var(--surface);
-      border: 1px solid var(--line);
     }
 
     .highlight strong {
       display: block;
       margin-bottom: 5px;
       color: var(--success);
-      font-family: Arial, sans-serif;
+    }
+
+    .highlight p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.95rem;
     }
 
     .gallery {
@@ -339,27 +337,37 @@
     }
 
     .figure {
-      background: rgba(255, 253, 248, 0.94);
-      border: 1px solid var(--line);
-      border-radius: 22px;
       overflow: hidden;
-      box-shadow: var(--shadow);
+    }
+
+    .figure button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
     }
 
     .figure img {
       display: block;
       width: 100%;
-      height: 270px;
+      height: 280px;
       object-fit: contain;
       background: #fff;
       padding: 14px;
+      transition: transform 0.22s ease;
+    }
+
+    .figure button:hover img {
+      transform: scale(1.02);
     }
 
     .figure figcaption {
       padding: 14px 16px 16px;
       font-size: 0.92rem;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     .figure figcaption strong {
@@ -376,10 +384,7 @@
 
     .resource {
       padding: 22px;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 239, 230, 0.85));
-      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 239, 230, 0.88));
     }
 
     .resource .tag {
@@ -387,7 +392,6 @@
       margin-bottom: 12px;
       padding: 6px 10px;
       border-radius: 999px;
-      font-family: Arial, sans-serif;
       font-size: 0.78rem;
       font-weight: 700;
       background: var(--accent-soft);
@@ -397,20 +401,21 @@
     .resource h3 {
       margin: 0 0 8px;
       color: var(--accent);
-      font-size: 1.1rem;
+      font-size: 1.08rem;
     }
 
     .resource p {
       margin: 0 0 14px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.8;
       font-size: 0.95rem;
     }
 
     .resource a {
       color: var(--accent-2);
-      font-family: Arial, sans-serif;
       font-weight: 700;
+      line-height: 1.7;
+      word-break: break-word;
     }
 
     .footer {
@@ -419,7 +424,7 @@
       border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 0.92rem;
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     code {
@@ -428,6 +433,68 @@
       background: var(--accent-soft);
       font-family: Consolas, monospace;
       font-size: 0.92em;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: rgba(17, 16, 14, 0.84);
+      z-index: 100;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 1100px;
+      width: 100%;
+      max-height: 92vh;
+      background: #fff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(29, 27, 25, 0.75);
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .lightbox img {
+      display: block;
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .lightbox-caption {
+      padding: 16px 20px 20px;
+      color: var(--muted);
+      line-height: 1.7;
+      background: #fff;
+    }
+
+    .lightbox-caption strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
     }
 
     @media (max-width: 980px) {
@@ -464,13 +531,18 @@
       .hero-side,
       .card,
       .resource,
-      .figure {
+      .figure,
+      .highlight {
         border-radius: 20px;
       }
 
       .hero-main,
       .hero-side {
         padding: 24px 20px;
+      }
+
+      .lightbox {
+        padding: 14px;
       }
     }
   </style>
@@ -492,27 +564,27 @@
     <section class="hero">
       <div class="hero-main">
         <div class="eyebrow">Public Research Website</div>
-        <h1>장내 마이크로바이옴 기반<br />대장암 예측 프로젝트</h1>
+        <h1>장내 마이크로바이옴 기반<br />대장암 예측 연구 프로젝트</h1>
         <p class="hero-sub">
           공개 메타게놈 코호트 <code>ZellerG_2014</code> 와 <code>YachidaS_2019</code> 를 이용해
-          colorectal cancer prediction 모델을 비교하고, development cohort와 external validation cohort
-          사이의 일반화 성능 차이를 평가한 프로젝트입니다.
+          대장암 예측 모델을 비교하고, 개발 코호트와 외부 검증 코호트 사이의 일반화 성능 차이를 평가한 연구입니다.
+          이 사이트는 공개 가능한 코드, 문서, figure, 요약 결과를 소개하는 프로젝트 홈페이지입니다.
         </p>
         <div class="btn-row">
-          <a class="btn btn-primary" href="https://github.com/mtc-ak/ICCB">Public Repository</a>
-          <a class="btn btn-secondary" href="https://github.com/mtc-ak/ICCB-data">Private Data Repository</a>
-          <a class="btn btn-secondary" href="#figures">결과 그림 보기</a>
+          <a class="btn btn-primary" href="https://github.com/mtc-ak/ICCB">공개 저장소 보기</a>
+          <a class="btn btn-secondary" href="https://github.com/mtc-ak/ICCB-data">비공개 데이터 저장소</a>
+          <a class="btn btn-secondary" href="#figures">대표 그림 보기</a>
         </div>
         <div class="notice">
           <strong>다운로드 안내</strong>
           이 공개 홈페이지에서는 데이터 파일을 직접 다운로드할 수 없습니다.
-          다운로드 가능한 데이터, 원본 파일, 대용량 산출물은 <code>Private GitHub Repository (ICCB-data)</code> 에서만 관리합니다.
+          다운로드 가능한 데이터, 원본 파일, 대용량 산출물은 <code>Private GitHub Repository (ICCB-data)</code> 에서만 제공합니다.
         </div>
       </div>
 
       <aside class="hero-side">
         <div>
-          <div class="side-label">Snapshot</div>
+          <div class="side-label">연구 요약</div>
           <div class="metric-block">
             <div class="metric">
               <strong>0.8487</strong>
@@ -539,20 +611,20 @@
       <div class="section-head">
         <h2>프로젝트 개요</h2>
         <p>
-          공개 가능한 코드, 문서, figure, 요약 결과를 한 곳에서 보여주는 소개용 사이트입니다.
-          데이터 배포보다는 연구 구조와 결과 해석을 빠르게 이해할 수 있도록 구성했습니다.
+          이 홈페이지는 데이터 다운로드용 포털이 아니라, 연구 구조와 분석 결과를 빠르게 이해할 수 있도록 구성한
+          공개 소개 페이지입니다. 공개 가능한 자료와 비공개 자료의 역할을 명확히 구분해 두었습니다.
         </p>
       </div>
       <div class="card-grid">
         <article class="card">
-          <h3>Datasets</h3>
+          <h3>사용 데이터셋</h3>
           <ul>
-            <li>Development cohort: <code>ZellerG_2014</code></li>
-            <li>External validation cohort: <code>YachidaS_2019</code></li>
+            <li>개발 코호트: <code>ZellerG_2014</code></li>
+            <li>외부 검증 코호트: <code>YachidaS_2019</code></li>
           </ul>
         </article>
         <article class="card">
-          <h3>Models</h3>
+          <h3>비교 모델</h3>
           <ul>
             <li>Logistic Regression</li>
             <li>Random Forest</li>
@@ -560,15 +632,15 @@
           </ul>
         </article>
         <article class="card">
-          <h3>Public Website</h3>
+          <h3>공개 홈페이지 역할</h3>
           <p>
-            코드, 논문 초안, 공개 figure, 경량 결과 파일을 정리해 보여주는 페이지입니다.
+            코드, 논문 초안, 공개 figure, 요약 결과를 정리하여 연구 내용을 소개합니다.
           </p>
         </article>
         <article class="card">
-          <h3>Private Repository</h3>
+          <h3>비공개 저장소 역할</h3>
           <p>
-            원본 데이터, 다운로드 파일, 대용량 산출물, 비공개 리소스는 private 저장소에서만 관리합니다.
+            원본 데이터, 다운로드 파일, 대용량 산출물, 비공개 자료는 private 저장소에서만 관리합니다.
           </p>
         </article>
       </div>
@@ -578,30 +650,30 @@
       <div class="section-head">
         <h2>핵심 결과</h2>
         <p>
-          개발 코호트에서는 Random Forest가 가장 좋은 분류 성능을 보였고,
-          외부 검증에서는 XGBoost가 가장 높은 AUC를 보였습니다. 다만 외부 코호트에서 전체 성능은 감소했습니다.
+          개발 코호트에서는 Random Forest가 가장 높은 성능을 보였고, 외부 검증에서는 XGBoost가 가장 높은 AUC를 보였습니다.
+          다만 외부 검증에서 전체 성능은 감소해 일반화 한계를 함께 보여주었습니다.
         </p>
       </div>
       <div class="summary">
         <div class="highlight-list">
           <div class="highlight">
-            <strong>Development Cohort</strong>
-            개발 코호트 테스트셋에서 Random Forest는 AUC 0.8487, F1-score 0.7500으로 가장 우수했습니다.
+            <strong>개발 코호트 결과</strong>
+            <p>개발 코호트 테스트셋에서 Random Forest는 AUC 0.8487, F1-score 0.7500으로 가장 우수했습니다.</p>
           </div>
           <div class="highlight">
-            <strong>External Validation</strong>
-            외부 검증에서는 XGBoost가 AUC 0.6228로 가장 높았지만, 전체적으로 개발 코호트보다 성능이 하락했습니다.
+            <strong>외부 검증 결과</strong>
+            <p>외부 검증에서는 XGBoost가 AUC 0.6228로 가장 높았지만, 전체적으로 개발 코호트보다 성능이 낮아졌습니다.</p>
           </div>
           <div class="highlight">
-            <strong>Calibration</strong>
-            외부 코호트에서 ECE는 Random Forest가 0.0705로 가장 낮아 확률 보정 성능이 가장 좋았습니다.
+            <strong>보정 성능</strong>
+            <p>외부 코호트에서 ECE는 Random Forest가 0.0705로 가장 낮아 확률 예측의 안정성이 가장 좋았습니다.</p>
           </div>
         </div>
         <div class="card">
-          <h3>해석 포인트</h3>
+          <h3>결과 해석</h3>
           <p>
-            이 결과는 내부 테스트셋 성능만으로 모델의 실사용 가능성을 판단하기 어렵다는 점을 보여줍니다.
-            외부 검증에서 성능 저하가 나타났기 때문에, 마이크로바이옴 기반 CRC 예측모델의 일반화에는 추가 검증이 필요합니다.
+            내부 테스트셋에서 높은 성능이 나오더라도 독립적인 외부 코호트에서 같은 수준의 결과가 유지되지는 않았습니다.
+            따라서 마이크로바이옴 기반 대장암 예측모델은 유망하지만, 실제 일반화 가능성을 높이기 위한 추가 검증이 필요합니다.
           </p>
         </div>
       </div>
@@ -609,39 +681,47 @@
 
     <section id="figures">
       <div class="section-head">
-        <h2>대표 Figure</h2>
+        <h2>대표 시각화</h2>
         <p>
-          프로젝트에서 생성한 주요 시각화입니다. 상세 데이터 다운로드는 제공하지 않지만,
-          공개 가능한 figure는 이 페이지에서 바로 확인할 수 있습니다.
+          프로젝트에서 생성한 주요 figure입니다. 이미지를 클릭하면 확대해서 볼 수 있습니다.
+          상세 데이터 다운로드는 제공하지 않으며, 공개 가능한 시각화만 이 페이지에 포함했습니다.
         </p>
       </div>
       <div class="gallery">
         <figure class="figure">
-          <img src="figures/fig1_roc_dev.png" alt="ROC curve figure" />
+          <button type="button" class="figure-open" data-src="figures/fig1_roc_dev.png" data-title="ROC Curve" data-caption="개발 코호트 테스트셋과 외부 검증 코호트의 ROC 성능 비교">
+            <img src="figures/fig1_roc_dev.png" alt="ROC curve figure" />
+          </button>
           <figcaption>
             <strong>ROC Curve</strong>
             개발 코호트 테스트셋과 외부 검증 코호트의 ROC 성능 비교.
           </figcaption>
         </figure>
         <figure class="figure">
-          <img src="figures/fig_cal.png" alt="Calibration figure" />
+          <button type="button" class="figure-open" data-src="figures/fig_cal.png" data-title="Calibration" data-caption="예측 확률과 실제 사건 비율의 일치 정도를 보여주는 reliability curve">
+            <img src="figures/fig_cal.png" alt="Calibration figure" />
+          </button>
           <figcaption>
             <strong>Calibration</strong>
             예측 확률과 실제 사건 비율의 일치 정도를 보여주는 reliability curve.
           </figcaption>
         </figure>
         <figure class="figure">
-          <img src="figures/fig3_perf_barplot.png" alt="Performance comparison figure" />
+          <button type="button" class="figure-open" data-src="figures/fig3_perf_barplot.png" data-title="Performance Comparison" data-caption="AUC, PR-AUC, Recall, F1, Accuracy를 모델별로 비교한 요약 그래프">
+            <img src="figures/fig3_perf_barplot.png" alt="Performance comparison figure" />
+          </button>
           <figcaption>
             <strong>Performance Comparison</strong>
             AUC, PR-AUC, Recall, F1, Accuracy를 모델별로 비교한 요약 그래프.
           </figcaption>
         </figure>
         <figure class="figure">
-          <img src="figures/fig5_generalizability.png" alt="Generalizability figure" />
+          <button type="button" class="figure-open" data-src="figures/fig5_generalizability.png" data-title="Generalizability" data-caption="개발 코호트와 외부 검증 코호트 사이에서 AUC가 어떻게 변하는지 비교">
+            <img src="figures/fig5_generalizability.png" alt="Generalizability figure" />
+          </button>
           <figcaption>
             <strong>Generalizability</strong>
-            development cohort와 external cohort 사이에서 AUC가 어떻게 변하는지 비교.
+            개발 코호트와 외부 검증 코호트 사이에서 AUC가 어떻게 변하는지 비교.
           </figcaption>
         </figure>
       </div>
@@ -649,44 +729,90 @@
 
     <section id="resources">
       <div class="section-head">
-        <h2>리소스</h2>
+        <h2>리소스 안내</h2>
         <p>
-          공개 코드와 private 데이터 저장소의 역할을 분리해 두었습니다.
-          목적에 따라 적절한 저장소를 이용할 수 있도록 정리했습니다.
+          공개 코드와 비공개 데이터 저장소의 역할을 분리하여 관리하고 있습니다.
+          목적에 따라 적절한 저장소를 이용할 수 있도록 아래에 정리했습니다.
         </p>
       </div>
       <div class="resource-grid">
         <article class="resource">
           <div class="tag">Public</div>
           <h3>ICCB Repository</h3>
-          <p>
-            공개 코드, 문서, 요약 결과, 홈페이지 소스를 관리하는 메인 저장소입니다.
-          </p>
+          <p>공개 코드, 문서, 요약 결과, 홈페이지 소스를 관리하는 메인 저장소입니다.</p>
           <a href="https://github.com/mtc-ak/ICCB">https://github.com/mtc-ak/ICCB</a>
         </article>
         <article class="resource">
           <div class="tag">Private</div>
           <h3>ICCB-data</h3>
-          <p>
-            다운로드 가능한 데이터, 대용량 파일, 비공개 산출물은 private 저장소에서만 제공합니다.
-          </p>
+          <p>다운로드 가능한 데이터, 대용량 파일, 비공개 산출물은 private 저장소에서만 제공합니다.</p>
           <a href="https://github.com/mtc-ak/ICCB-data">https://github.com/mtc-ak/ICCB-data</a>
         </article>
         <article class="resource">
           <div class="tag">Local</div>
           <h3>Workspace</h3>
-          <p>
-            로컬 홈페이지 수정 기준 경로는 <code>D:\data\OneDrive\00_공부중\한주\ICBBS</code> 입니다.
-          </p>
-          <a href="#overview">현재 페이지 기준 설명 보기</a>
+          <p>로컬 홈페이지 작업 기준 경로는 <code>D:\data\OneDrive\00_공부중\한주\ICBBS</code> 입니다.</p>
+          <a href="#overview">현재 사이트 구성 보기</a>
         </article>
       </div>
     </section>
 
     <footer class="footer">
-      ICCB public site is designed for project presentation, code access, and figure preview.
-      Downloadable data and private artifacts are intentionally separated into the private repository.
+      이 사이트는 프로젝트 소개, 공개 코드 접근, figure 미리보기를 위한 공개 홈페이지입니다.
+      다운로드 가능한 데이터와 비공개 산출물은 의도적으로 private 저장소로 분리해 두었습니다.
     </footer>
   </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" type="button" aria-label="확대 이미지 닫기">&times;</button>
+      <img id="lightbox-image" src="" alt="" />
+      <div class="lightbox-caption">
+        <strong id="lightbox-title"></strong>
+        <span id="lightbox-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxTitle = document.getElementById("lightbox-title");
+    const lightboxText = document.getElementById("lightbox-text");
+    const closeButton = document.querySelector(".lightbox-close");
+    const openButtons = document.querySelectorAll(".figure-open");
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.src = "";
+      lightboxImage.alt = "";
+    }
+
+    openButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        lightboxImage.src = button.dataset.src;
+        lightboxImage.alt = button.dataset.title || "Figure preview";
+        lightboxTitle.textContent = button.dataset.title || "";
+        lightboxText.textContent = button.dataset.caption || "";
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
+  </script>
 </body>
 </html>
