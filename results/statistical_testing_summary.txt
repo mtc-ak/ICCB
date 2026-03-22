@@ -1,0 +1,62 @@
+==== DeLong Tests ====
+
+	DeLong's test for two correlated ROC curves
+
+data:  roc_xgb_d and roc_lr_d
+Z = 3.4393, p-value = 0.0005833
+alternative hypothesis: true difference in AUC is not equal to 0
+95 percent confidence interval:
+ 0.1782744 0.6506730
+sample estimates:
+AUC of roc1 AUC of roc2 
+  0.8059211   0.3914474 
+
+
+
+	DeLong's test for two correlated ROC curves
+
+data:  roc_xgb_d and roc_rf_d
+Z = -0.69446, p-value = 0.4874
+alternative hypothesis: true difference in AUC is not equal to 0
+95 percent confidence interval:
+ -0.16345289  0.07792658
+sample estimates:
+AUC of roc1 AUC of roc2 
+  0.8059211   0.8486842 
+
+
+
+	DeLong's test for two correlated ROC curves
+
+data:  roc_xgb_e and roc_lr_e
+Z = 2.542, p-value = 0.01102
+alternative hypothesis: true difference in AUC is not equal to 0
+95 percent confidence interval:
+ 0.01862688 0.14408661
+sample estimates:
+AUC of roc1 AUC of roc2 
+  0.6228111   0.5414543 
+
+
+==== McNemar Tests ====
+        pred_lr
+pred_xgb  0  1
+       0  8 10
+       1 10  7
+
+	McNemar's Chi-squared test
+
+data:  tab_xlr
+McNemar's chi-squared = 0, df = 1, p-value = 1
+
+
+        pred_rf
+pred_xgb  0  1
+       0 13  5
+       1  6 11
+
+	McNemar's Chi-squared test with continuity correction
+
+data:  tab_xrf
+McNemar's chi-squared = 0, df = 1, p-value = 1
+
