@@ -1,422 +1,137 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>마이크로바이옴 기반 대장암 예측 | Microbiome-Based CRC Prediction</title>
-  <meta name="description" content="마이크로바이옴 기반 대장암 예측을 위한 머신러닝 모델의 통계적 비교 및 외부 검증 연구">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICCB</title>
   <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --primary:   #1a3a5c;
-      --accent:    #2e6da4;
-      --accent2:   #e8534a;
-      --bg:        #fafafa;
-      --surface:   #ffffff;
-      --border:    #d8dee4;
-      --text:      #24292f;
-      --muted:     #57606a;
-      --code-bg:   #f6f8fa;
-      --radius:    6px;
-      --shadow:    0 1px 4px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.04);
-      --max-w:     860px;
+      --bg: #f6f3ee;
+      --card: #fffdf9;
+      --text: #1f1f1f;
+      --muted: #5f5a52;
+      --accent: #8c3b2a;
+      --line: #ded6ca;
     }
-    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Noto Serif KR', Georgia, serif;
-      background: var(--bg);
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(180deg, #f3efe8 0%, #fbfaf7 100%);
       color: var(--text);
-      line-height: 1.8;
-      font-size: 16px;
     }
 
-    /* ── Nav ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(26,58,92,.97);
-      backdrop-filter: blur(8px);
-      padding: 0 2rem;
-      display: flex; align-items: center; gap: 0;
-    }
-    .nav-brand {
-      color: #fff; font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: .9rem; padding: 1rem 1.5rem 1rem 0;
-      border-right: 1px solid rgba(255,255,255,.2); margin-right: 1rem;
-      white-space: nowrap;
-    }
-    nav a {
-      color: rgba(255,255,255,.8); text-decoration: none;
-      font-family: 'Noto Sans KR', sans-serif; font-size: .82rem;
-      padding: 1rem .75rem; display: inline-block;
-      transition: color .2s;
-    }
-    nav a:hover { color: #fff; }
-
-    /* ── Prose ── */
-    h1, h2, h3 { margin-top: 2rem; margin-bottom: .75rem; line-height: 1.4; font-weight: 600; }
-    h1 { font-size: 2rem; color: var(--primary); }
-    h2 { font-size: 1.5rem; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: .5rem; }
-    h3 { font-size: 1.1rem; color: var(--primary); }
-    p { margin-bottom: 1rem; text-align: justify; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    strong { font-weight: 600; }
-    em { font-style: italic; }
-
-    blockquote {
-      margin: 1.5rem 0;
-      padding: 1rem 1.5rem;
-      background: var(--code-bg);
-      border-left: 4px solid var(--accent);
-      border-radius: var(--radius);
-      font-style: italic;
-      color: var(--muted);
-    }
-    blockquote p { margin: 0; }
-
-    table {
-      width: 100%;
-      margin: 1.5rem 0;
-      border-collapse: collapse;
-      font-size: .95rem;
-    }
-    th, td {
-      padding: .75rem;
-      text-align: left;
-      border: 1px solid var(--border);
-    }
-    th {
-      background: var(--code-bg);
-      font-weight: 600;
-      color: var(--primary);
-    }
-    tr:nth-child(even) { background: var(--code-bg); }
-
-    code {
-      font-family: 'Source Code Pro', monospace;
-      background: var(--code-bg);
-      padding: .2em .4em;
-      border-radius: var(--radius);
-      font-size: .9em;
-    }
-
-    pre {
-      background: var(--code-bg);
-      padding: 1rem;
-      border-radius: var(--radius);
-      overflow-x: auto;
-      margin: 1.5rem 0;
-      border: 1px solid var(--border);
-    }
-    pre code {
-      background: none;
-      padding: 0;
-      border-radius: 0;
-    }
-
-    ol, ul {
-      margin: 1rem 0 1rem 2rem;
-      line-height: 2;
-    }
-    li { margin-bottom: .5rem; }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: var(--radius);
-      margin: 1.5rem 0;
-    }
-
-    /* ── Layout ── */
-    .container {
-      max-width: var(--max-w);
+    .wrap {
+      max-width: 920px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 56px 20px 80px;
     }
 
-    .prose {
-      padding: 3rem 0;
+    h1 {
+      font-size: 3rem;
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
     }
 
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .6s ease-out, transform .6s ease-out;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+    h2 {
+      margin-top: 0;
+      color: var(--accent);
     }
 
-    footer {
-      background: var(--primary);
-      color: #fff;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 4rem;
-      font-size: .9rem;
+    p {
+      line-height: 1.7;
     }
-    footer a {
-      color: #fff;
+
+    .lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
       text-decoration: underline;
     }
 
-    @media (max-width: 768px) {
-      nav { flex-wrap: wrap; padding: 0 1rem; }
-      .nav-brand { padding: 1rem 0; border-right: none; margin-bottom: 1rem; }
-      h1 { font-size: 1.5rem; }
-      h2 { font-size: 1.2rem; }
-      .container { padding: 0 1rem; }
-      .prose { padding: 1.5rem 0; }
-      table { font-size: .85rem; }
-      th, td { padding: .5rem; }
+    ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      line-height: 1.7;
+    }
+
+    .topline {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 14px;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-brand">마이크로바이옴 기반 대장암 예측</div>
-    <a href="#abstract">초록</a>
-    <a href="#methods">방법</a>
-    <a href="#results">결과</a>
-    <a href="#discussion">논의</a>
-    <a href="#references">참고문헌</a>
-    <a href="https://github.com/mtc-ak/ICCB-data" target="_blank" style="margin-left: auto;">GitHub (데이터)</a>
-  </nav>
-
-  <div class="container prose fade-in">
-    <h1>마이크로바이옴 기반 대장암 예측을 위한 머신러닝 모델의 통계적 비교 및 외부 검증</h1>
-    <p style="font-size: .95rem; color: var(--muted); margin-bottom: 2rem;">
-      <strong>저자:</strong> 윤장원, 임준규, 강준호, 정인준, 지창훈, 박민준<br>
-      <strong>시간:</strong> 2024년
+  <div class="wrap">
+    <div class="topline">ICCB Project</div>
+    <h1>Microbiome-Based CRC Prediction</h1>
+    <p class="lead">
+      A public research project comparing machine learning models for colorectal cancer prediction
+      using gut microbiome metagenomic cohorts and external validation.
     </p>
 
-    <section id="abstract">
-      <h2>초록</h2>
-      <p>대장암은 전 세계적으로 중요한 공중 보건 문제이며, 조기 진단은 환자의 치료 결과를 크게 향상시킬 수 있다. 본 연구는 장내 마이크로바이옴 데이터를 이용하여 대장암 예측 성능을 비교하는 머신러닝 모델의 통계적 평가를 제시한다.</p>
-      <p>우리는 다양한 머신러닝 알고리즘(로지스틱 회귀, 랜덤 포레스트, 그래디언트 부스팅, 서포트 벡터 머신, 신경망)을 구현하고, 대량의 메타게노믹스 시퀀싱 데이터에 대해 교차 검증 및 외부 검증을 수행했다.</p>
-      <p>우리의 결과는 모든 모델이 우수한 성능을 보였으며(AUC > 0.85), 특히 그래디언트 부스팅 모델이 최고의 성능을 달성했음을 보여준다. 이러한 발견은 마이크로바이옴 기반 접근이 대장암 조기 진단과 스크리닝을 위한 효과적인 도구가 될 수 있음을 시사한다.</p>
-    </section>
+    <div class="grid">
+      <section class="card">
+        <h2>Overview</h2>
+        <p>
+          This project evaluates microbiome-based prediction of colorectal cancer using
+          public cohorts and compares Logistic Regression, Random Forest, and XGBoost.
+        </p>
+      </section>
 
-    <section id="methods">
-      <h2>방법</h2>
+      <section class="card">
+        <h2>Datasets</h2>
+        <ul>
+          <li>Development cohort: ZellerG_2014</li>
+          <li>External validation cohort: YachidaS_2019</li>
+        </ul>
+      </section>
 
-      <h3>1. 데이터 수집 및 전처리</h3>
-      <p>본 연구에서는 대규모 장내 마이크로바이옴 메타게노믹스 데이터를 사용했다. 데이터는 다음과 같이 처리되었다:</p>
-      <ul>
-        <li><strong>샘플 수집:</strong> 건강한 대조군(n=250)과 대장암 환자(n=250)로부터 대변 샘플 수집</li>
-        <li><strong>DNA 추출:</strong> 표준 방법을 사용한 메타게노믹 DNA 추출</li>
-        <li><strong>시퀀싱:</strong> Illumina MiSeq 플랫폼을 사용한 16S rRNA 유전자 증폭 시퀀싱</li>
-        <li><strong>데이터 처리:</strong> QIIME2를 이용한 분석 파이프라인 실행</li>
-      </ul>
+      <section class="card">
+        <h2>Models</h2>
+        <ul>
+          <li>Logistic Regression</li>
+          <li>Random Forest</li>
+          <li>XGBoost</li>
+        </ul>
+      </section>
 
-      <h3>2. 특성 엔지니어링</h3>
-      <p>마이크로바이옴 데이터로부터 다음과 같은 특성을 추출했다:</p>
-      <ul>
-        <li><strong>분류학적 특성:</strong> 속(Genus) 수준의 상대 풍도</li>
-        <li><strong>다양성 지표:</strong> Shannon 지수, Simpson 지수, Chao1 지수</li>
-        <li><strong>기능적 특성:</strong> PICRUSt를 이용한 대사 경로 예측</li>
-        <li><strong>조성 특성:</strong> Firmicutes/Bacteroidetes 비율</li>
-      </ul>
-
-      <h3>3. 머신러닝 모델</h3>
-      <p>다음의 머신러닝 알고리즘을 구현하여 비교했다:</p>
-      <ul>
-        <li><strong>로지스틱 회귀 (LR):</strong> 선형 분류기로서 기준 모델</li>
-        <li><strong>랜덤 포레스트 (RF):</strong> 앙상블 트리 기반 모델</li>
-        <li><strong>그래디언트 부스팅 (GB):</strong> XGBoost를 이용한 부스팅 모델</li>
-        <li><strong>서포트 벡터 머신 (SVM):</strong> 비선형 경계면을 학습하는 모델</li>
-        <li><strong>신경망 (NN):</strong> 3개의 은닉층을 가진 다층 퍼셉트론</li>
-      </ul>
-
-      <h3>4. 모델 평가</h3>
-      <p>다음의 평가 지표를 사용했다:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>지표</th>
-            <th>설명</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>정확도 (Accuracy)</td>
-            <td>전체 예측 중 정확한 예측의 비율</td>
-          </tr>
-          <tr>
-            <td>민감도 (Sensitivity)</td>
-            <td>질병이 있는 샘플 중 올바르게 예측한 비율</td>
-          </tr>
-          <tr>
-            <td>특이도 (Specificity)</td>
-            <td>질병이 없는 샘플 중 올바르게 예측한 비율</td>
-          </tr>
-          <tr>
-            <td>AUC-ROC</td>
-            <td>모든 분류 임계값에서 모델 성능의 평균</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>각 모델에 대해 5-폴드 교차 검증을 수행했고, 추가로 독립적인 외부 검증 데이터셋으로 최종 평가를 진행했다.</p>
-    </section>
-
-    <section id="results">
-      <h2>결과</h2>
-
-      <h3>1. 모델 성능 비교</h3>
-      <p>모든 머신러닝 모델은 우수한 대장암 예측 성능을 보였다:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>모델</th>
-            <th>정확도</th>
-            <th>민감도</th>
-            <th>특이도</th>
-            <th>AUC</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>로지스틱 회귀</td>
-            <td>82.3%</td>
-            <td>81.2%</td>
-            <td>83.4%</td>
-            <td>0.876</td>
-          </tr>
-          <tr>
-            <td>랜덤 포레스트</td>
-            <td>85.1%</td>
-            <td>84.3%</td>
-            <td>85.9%</td>
-            <td>0.902</td>
-          </tr>
-          <tr>
-            <td>그래디언트 부스팅</td>
-            <td><strong>87.8%</strong></td>
-            <td><strong>87.5%</strong></td>
-            <td><strong>88.1%</strong></td>
-            <td><strong>0.926</strong></td>
-          </tr>
-          <tr>
-            <td>서포트 벡터 머신</td>
-            <td>84.5%</td>
-            <td>83.2%</td>
-            <td>85.8%</td>
-            <td>0.895</td>
-          </tr>
-          <tr>
-            <td>신경망</td>
-            <td>86.2%</td>
-            <td>85.8%</td>
-            <td>86.6%</td>
-            <td>0.911</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>2. 특성 중요도 분석</h3>
-      <p>그래디언트 부스팅 모델에서 확인된 주요 특성들(top 10):</p>
-      <ol>
-        <li><em>Bacteroides</em> 속의 상대 풍도 (13.2%)</li>
-        <li>Shannon 다양성 지수 (11.8%)</li>
-        <li><em>Faecalibacterium</em> 속의 상대 풍도 (10.5%)</li>
-        <li>Chao1 풍부도 지수 (9.7%)</li>
-        <li>Firmicutes/Bacteroidetes 비율 (8.9%)</li>
-        <li><em>Alistipes</em> 속의 상대 풍도 (7.6%)</li>
-        <li>숏체인 지방산 생성 경로 (6.8%)</li>
-        <li><em>Prevotella</em> 속의 상대 풍도 (6.2%)</li>
-        <li>내독소 생성 경로 (5.9%)</li>
-        <li><em>Ruminococcus</em> 속의 상대 풍도 (5.4%)</li>
-      </ol>
-
-      <h3>3. 외부 검증 결과</h3>
-      <p>독립적인 외부 검증 데이터셋(n=100)에 대한 결과:</p>
-      <ul>
-        <li><strong>그래디언트 부스팅:</strong> AUC 0.918, 정확도 86.0%</li>
-        <li><strong>랜덤 포레스트:</strong> AUC 0.898, 정확도 84.0%</li>
-        <li><strong>신경망:</strong> AUC 0.908, 정확도 85.0%</li>
-      </ul>
-      <p>모든 모델이 훈련 데이터에서의 성능과 일관되게 우수한 성능을 외부 데이터에서도 유지했다.</p>
-    </section>
-
-    <section id="discussion">
-      <h2>논의</h2>
-
-      <h3>주요 발견</h3>
-      <p>본 연구의 주요 결과는 다음과 같다:</p>
-      <ol>
-        <li>
-          <strong>마이크로바이옴 기반 진단의 가능성:</strong> 장내 마이크로바이옴 특성만으로도 대장암을 높은 정확도로 예측할 수 있다는 것을 보여줬다. 이는 마이크로바이옴 컴포지션의 변화가 대장암 발병과 밀접한 관련이 있음을 시사한다.
-        </li>
-        <li>
-          <strong>모델 선택의 중요성:</strong> 그래디언트 부스팅 모델이 가장 우수한 성능을 보였으며, 이는 복잡한 비선형 관계를 포착하는 앙상블 방법의 장점을 보여준다.
-        </li>
-        <li>
-          <strong>생물학적 타당성:</strong> 모델에서 식별된 중요 특성들(예: <em>Bacteroides</em>, <em>Faecalibacterium</em>)은 이전 문헌에서 대장암과 관련이 있는 것으로 보고된 속들이다.
-        </li>
-      </ol>
-
-      <h3>임상적 함의</h3>
-      <p>본 연구의 결과는 다음과 같은 임상적 의의를 갖는다:</p>
-      <ul>
-        <li><strong>비침습적 선별:</strong> 마이크로바이옴 기반 진단은 침습적 대장내시경 검사 없이 조기 위험군을 식별할 수 있다.</li>
-        <li><strong>비용-효과성:</strong> 메타게노믹 시퀀싱 비용이 계속 감소하고 있어, 향후 대규모 선별 프로그램에서 적용 가능성이 높다.</li>
-        <li><strong>개인화된 위험 평가:</strong> 모델 점수는 환자별 맞춤형 위험 평가 및 예방 전략 수립에 활용될 수 있다.</li>
-      </ul>
-
-      <h3>한계 및 향후 연구</h3>
-      <p>본 연구의 한계는 다음과 같다:</p>
-      <ul>
-        <li><strong>샘플 크기:</strong> 더 큰 규모의 다중 센터 연구가 필요하다.</li>
-        <li><strong>인종/지역적 다양성:</strong> 다양한 인종 및 지역 집단에서의 검증이 필요하다.</li>
-        <li><strong>메타데이터 통합:</strong> 식이, 약물, 생활 습관 등의 메타데이터와 통합 분석이 필요하다.</li>
-      </ul>
-      <p>향후 연구는 다음을 포함해야 한다:</p>
-      <ul>
-        <li>장기 추적 연구를 통한 예측 모델의 임상적 유용성 평가</li>
-        <li>메타게노믹 데이터와 다른 오믹스 데이터(단백질체학, 대사체학)의 통합</li>
-        <li>인공지능 기반 해석 가능성(Explainable AI) 기법의 적용</li>
-      </ul>
-    </section>
-
-    <section id="references">
-      <h2>참고문헌</h2>
-      <ol>
-        <li>Sung H, et al. Global Cancer Statistics 2020: GLOBOCAN estimates of incidence and mortality worldwide for 36 cancers in 185 countries. <em>CA Cancer J Clin</em>. 2021;71(3):209-249.</li>
-        <li>Brenner H, et al. Colorectal cancer. <em>Lancet</em>. 2014;383(9927):1490-1502.</li>
-        <li>Zeller G, et al. Potential of fecal microbiota for early-stage detection of colorectal cancer. <em>Mol Syst Biol</em>. 2014;10(11):761.</li>
-        <li>Wirbel J, et al. Meta-analysis of fecal metagenomes reveals global microbial signatures that are specific for colorectal cancer. <em>Nat Med</em>. 2019;25(12):1788-1798.</li>
-        <li>Thomas AM, et al. Metagenomic analysis of colorectal cancer datasets identifies cross-cohort microbial signatures and a flp operon as a putative marker. <em>Nat Commun</em>. 2019;10(1):5889.</li>
-        <li>Yachida S, et al. Metagenomic and metabolomic analyses reveal distinct stage-specific phenotypes of the gut microbiota in colorectal cancer. <em>Nat Med</em>. 2019;25(6):968-976.</li>
-        <li>Deng Y, et al. Dysbiosis in gastric microbiota is associated with gastric cancer risk. <em>J Gastric Cancer</em>. 2020;20(2):149-157.</li>
-        <li>Ahn J, et al. Human gut microbiome and colorectal cancer. <em>J Clin Oncol</em>. 2013;31(19):2406-2411.</li>
-        <li>Gopalakrishnan V, et al. Gut microbiome modulates response to anti-PD-1 immunotherapy in melanoma patients. <em>Science</em>. 2018;359(6371):97-100.</li>
-        <li>Routy B, et al. Gut microbiome influences efficacy of PD-1-based immunotherapy against epithelial tumors. <em>Science</em>. 2018;359(6371):91-97.</li>
-      </ol>
-    </section>
-
+      <section class="card">
+        <h2>Repositories</h2>
+        <ul>
+          <li><a href="https://github.com/mtc-ak/ICCB">Public Repository</a></li>
+          <li><a href="https://github.com/mtc-ak/ICCB-data">Private Data Repository</a></li>
+          <li><a href="https://mtc-ak.github.io/ICCB">Project Homepage</a></li>
+        </ul>
+      </section>
+    </div>
   </div>
-
-  <footer>
-    <p>
-      <strong>데이터 및 코드:</strong> 연구 데이터와 분석 코드는
-      <a href="https://github.com/mtc-ak/ICCB-data" target="_blank">GitHub 저장소(ICCB-data)</a>에서 접근할 수 있습니다.
-      <br><br>
-      <strong>연락처:</strong> iccb.research@example.com
-      <br><br>
-      © 2024 Microbiome-Based CRC Prediction Research
-    </p>
-  </footer>
-
-  <script>
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
