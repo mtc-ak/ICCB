@@ -346,7 +346,7 @@
     <span>n = 290 (Dev) + 212 (Ext)</span>
   </div>
   <div class="btn-group">
-    <a href="paper/마이크로바이옴_CRC_예측_개선논문.docx" class="btn btn-primary" download>📄 논문 다운로드 (.docx)</a>
+    <a href="https://github.com/mtc-ak/ICCB-private" class="btn btn-primary" title="Private repository access">🔐 Private Repo</a>
     <a href="dashboard/results_dashboard.html" class="btn btn-outline">📊 결과 대시보드</a>
     <a href="https://github.com/mtc-ak/ICCB" class="btn btn-outline">🔗 GitHub</a>
   </div>
@@ -767,47 +767,27 @@ delong_p &lt;- <span class="hl-fn">roc.test</span>(roc_xgb, roc_lr, method=<span
 <section id="download">
   <div class="container fade-in">
     <h2>자료 다운로드</h2>
+    <div class="note" style="margin: 1.5rem 0 2rem;">
+      <strong>📋 개인정보 보호 안내</strong>
+      <p style="margin-top: 0.5rem; margin-bottom: 0;">
+        본 저장소의 일부 자료(코드, 분석 결과 데이터)는 비공개 저장소에서 관리됩니다. 
+        <a href="https://github.com/mtc-ak/ICCB-private" style="color: var(--accent);">비공개 저장소</a>에 접근하려면 
+        리포지토리 관리자에게 권한을 요청해 주세요.
+      </p>
+    </div>
     <div class="dl-grid">
-      <a href="paper/마이크로바이옴_CRC_예측_개선논문.docx" class="dl-item" download>
-        <span class="dl-icon">📄</span>
+      <a href="https://github.com/mtc-ak/ICCB" class="dl-item" target="_blank">
+        <span class="dl-icon">🔗</span>
         <div class="dl-info">
-          <div class="name">개선 논문 (.docx)</div>
-          <div class="type">Word 문서 · 전체 논문</div>
+          <div class="name">Public GitHub 저장소</div>
+          <div class="type">전체 소스 코드 및 가이드</div>
         </div>
       </a>
-      <a href="code/microbiome_CRC_prediction_full.R" class="dl-item" download>
-        <span class="dl-icon">📊</span>
+      <a href="https://github.com/mtc-ak/ICCB-private" class="dl-item" target="_blank" title="Private repository access required">
+        <span class="dl-icon">🔐</span>
         <div class="dl-info">
-          <div class="name">R 분석 코드</div>
-          <div class="type">.R · 675줄 · curatedMetagenomicData</div>
-        </div>
-      </a>
-      <a href="code/microbiome_CRC_prediction_full.py" class="dl-item" download>
-        <span class="dl-icon">🐍</span>
-        <div class="dl-info">
-          <div class="name">Python 분석 코드</div>
-          <div class="type">.py · 881줄 · sklearn / XGBoost</div>
-        </div>
-      </a>
-      <a href="results/final_results.json" class="dl-item" download>
-        <span class="dl-icon">📁</span>
-        <div class="dl-info">
-          <div class="name">분석 결과 데이터</div>
-          <div class="type">JSON · 전체 지표 수치</div>
-        </div>
-      </a>
-      <a href="results/metrics_dev_test.tsv" class="dl-item" download>
-        <span class="dl-icon">📋</span>
-        <div class="dl-info">
-          <div class="name">개발 코호트 지표</div>
-          <div class="type">TSV · 모델별 성능</div>
-        </div>
-      </a>
-      <a href="results/metrics_external.tsv" class="dl-item" download>
-        <span class="dl-icon">📋</span>
-        <div class="dl-info">
-          <div class="name">외부 검증 지표</div>
-          <div class="type">TSV · 모델별 성능</div>
+          <div class="name">Private 저장소 (인증 필요)</div>
+          <div class="type">상세 코드, 데이터, 대시보드</div>
         </div>
       </a>
       <a href="dashboard/results_dashboard.html" class="dl-item">
@@ -817,11 +797,11 @@ delong_p &lt;- <span class="hl-fn">roc.test</span>(roc_xgb, roc_lr, method=<span
           <div class="type">HTML · 자체포함 · 오프라인 사용 가능</div>
         </div>
       </a>
-      <a href="https://github.com/mtc-ak/ICCB" class="dl-item" target="_blank">
-        <span class="dl-icon">🔗</span>
+      <a href="https://bioconductor.org/packages/curatedMetagenomicData/" class="dl-item" target="_blank">
+        <span class="dl-icon">📁</span>
         <div class="dl-info">
-          <div class="name">GitHub 저장소</div>
-          <div class="type">전체 소스 코드 및 데이터</div>
+          <div class="name">curatedMetagenomicData</div>
+          <div class="type">분석 원본 데이터 저장소</div>
         </div>
       </a>
     </div>
@@ -834,12 +814,13 @@ delong_p &lt;- <span class="hl-fn">roc.test</span>(roc_xgb, roc_lr, method=<span
   <p>Microbiome-Based Colorectal Cancer Prediction — Machine Learning Analysis</p>
   <div class="footer-links">
     <a href="https://github.com/mtc-ak/ICCB">GitHub Repository</a>
+    <a href="https://github.com/mtc-ak/ICCB-private">Private Repository</a>
     <a href="https://bioconductor.org/packages/curatedMetagenomicData/" target="_blank">curatedMetagenomicData</a>
     <a href="dashboard/results_dashboard.html">Results Dashboard</a>
   </div>
   <p style="margin-top:1.5rem; font-size:.78rem">
     데이터 출처: ZellerG_2014 · YachidaS_2019 (curatedMetagenomicData, Bioconductor)<br>
-    분석 코드 및 결과는 MIT License 하에 공개됩니다.
+    공개 코드는 MIT License 하에 공개됩니다. 비공개 저장소는 별도 접근 권한이 필요합니다.
   </p>
 </footer>
 
